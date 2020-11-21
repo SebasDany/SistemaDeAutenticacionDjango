@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <small class="text-danger">
+        {% if form.errors %}
+            {% for field in form %}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        {{ error|escape }}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        
+            {% if form.non_field_errors%}
+                {% for error in form.non_field_errors %}
+                    {{ error|escape }}
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    </small>
+    <form class="user" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" class="form-control form-control-user" id="id_username" name="username" aria-describedby="emailHelp" placeholder="Usuario">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control form-control-user" id="id_password" name="password" placeholder="Password">
+        </div>
+
+        {# { form.as_p } #}
+
+        <button type="submit" class="btn btn-primary btn-user btn-block">Acceder</button>
+
+    </form>
+
+</body>
+
+</html>

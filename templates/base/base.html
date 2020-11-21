@@ -1,0 +1,25 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <img src="{% static 'base/images/shipping.jpg'%}">
+    <h1>Sistema de compras</h1>
+    {%for c in content%} {{c}} {% endfor %}
+    <!-- <form method="POST" action="/productos/">
+        {%csrf_token%}
+        <input min="1" value=1 type="number" name="cantidad">
+        <input class="btn btn-dark" type="submit" name="producto" value="1">
+        <input value=26.5 type="number" name="precio">
+    </form> -->
+    <a href="{% url 'bases:logout' %}">Salir</a>
+</body>
+
+</html>

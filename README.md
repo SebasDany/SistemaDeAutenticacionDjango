@@ -1,0 +1,1 @@
+para ejecutar instalar todos los paquetes que te salte de error cuando ejecutas python manage.py runserver y valdra a lo que luego vuelves a poner el comando: python manage.py runserver 
