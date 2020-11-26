@@ -7,8 +7,32 @@
     <title>Document</title>
 </head>
 <body>
-  <p><h1>Validacion</h1></p>
+  
   <!--Este es el preview -->
+  <div class="alert alert-info">
+    <h1>  Sistema de Validacion</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+      <div class="col">
+        
+      </div>
+      <div class="col-8">
+        <h3>{{ms}}</h3>
+      </div>
+      <div class="col">
+        <a href="">{{user.username}}</a>
+      </div>
+
+      <div class="col">
+        <a href="{% url 'bases:logout' %}">LOGOUT</a>
+      </div>
+
+      
+    </div>
+    
+  </div>
   
   <form  method="post" enctype="multipart/form-data">
       {% csrf_token %}
@@ -27,7 +51,7 @@
   </div>
 {% endfor %}
 
-    <h3>{{ms}}</h3>
+    
 <form  method="GET"  >
 
 <table class="table"> 
