@@ -16,7 +16,7 @@ urlpatterns = [
    #path('validar/',auth_views.LoginView.as_view(template_name='bases/autenticar.html'),name='val'),
    path('validar/',validar,name='val'),
    # path('success/',success,name='vall'),
-   path('valid/<str:name>/',valid,name='scs'),
+   path('valid/<str:name>/<str:email>/',valid,name='scs'),
 
 
   
