@@ -1,0 +1,36 @@
+body {
+	padding: 10px ;
+	
+	border:25;
+	background-color:#0194fe;
+	
+  }
+  header{
+	padding: 10px ;
+	background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfB9KPDxUzYCaD9NOfgKdoNc2AgUK54W9JA&usqp=CAU');
+ 
+  }
+
+  footer{
+	padding: 100px ;
+	  background-color:rgb(15, 165, 192);
+	  padding: 10px ;
+	background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfB9KPDxUzYCaD9NOfgKdoNc2AgUK54W9JA&usqp=CAU');
+ 
+  }
+
+
+  
+ h1, h3,h4{
+	text-align: center;
+
+	color:white;
+  }
+
+ div.container{
+	padding: 10px ;
+
+ } 
+button{
+	color: red;
+}

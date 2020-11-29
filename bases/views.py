@@ -57,7 +57,7 @@ def validar(request):
                 #
                 imagenes.append(fichero)
     
-        ran2=random.sample(range(0, len(imagenes)),4)
+        ran2=random.sample(range(0, len(imagenes)),12)
         print(ran2)
 
         print(len(imagenes))
@@ -72,8 +72,10 @@ def validar(request):
     
         #imsend.append(imagenes[ran1])
         print(imsend)
-        ms="Seleccionar imagen para generar clave"
+        ms="Seleccione una imagen para generar clave"
         estado='disabled '
+
+        progress="https://www.gifde.com/gif/otros/decoracion/cargando-loading/cargando-loading-039.gif"
         return render(request, 'base/autenticar.html',{'im':imsend,'ms':ms,'estado':estado})
 
        
@@ -88,7 +90,7 @@ def valid(request,name,email):
         print(name)
         
         procesarImagen(foto1)
-        messages.success(request, 'Su clave se ha creado correctamente!')
+        messages.success(request, 'Su clave se ha generado correctamente!')
         sendImage('clave.png',email)
         
 
@@ -98,30 +100,40 @@ def valid(request,name,email):
         im=Imagen()
         print(im)
         im.imagen=request.FILES.get('myfile')
-        im.save()
-        print('Imagen Guardad..................',im.imagen.name)
-        for i in range(10000):
-            print(i)
-        
-        
+        if(im.imagen==None):
+             messages.success(request, 'Por favor suba una imagen!')
+             return render(request, 'base/autenticar.html')
 
-        foto =cv2.imread('./media/'+im.imagen.name)
-        upl = cv2.resize(foto, (255,255))
-        #print(len(upl))
-        print("===============",im.imagen.name)
-
-        diferencia=cv2.subtract(upl,password)
-        if not np.any(diferencia):
-            print('estoy dentro')            
-            messages.success(request, 'Autenticacion correcta!')
-            return render(request, 'base/base.html')
         else:
-            print('estoy fuera')
-            messages.success(request, 'Autenticacion  incorrecta!')
+                
+            print("ggggggggggggggggg",im.imagen)
+            im.save()
+            print('Imagen Guardad..................',im.imagen.name)
+            
+            
+            
 
-            return render(request, 'base/autenticar.html')
-                    
-    return render(request, 'base/autenticar.html')
+            foto =cv2.imread('./media/'+im.imagen.name)
+            upl = cv2.resize(foto, (255,255))
+            #print(len(upl))
+            print("===============",im.imagen.name)
+
+            diferencia=cv2.subtract(upl,password)
+            if not np.any(diferencia):
+                print('estoy dentro')            
+                messages.success(request, 'Autenticacion correcta!')
+                print('Listo para eliminar imagen ',im.imagen.name)
+                os.remove('./media/'+im.imagen.name)
+                print('Eliminado')
+                return render(request, 'base/base.html')
+            else:
+                print('estoy fuera')
+                messages.success(request, 'Autenticacion  incorrecta!')
+
+                return render(request, 'base/autenticar.html')
+        
+                       
+    return render(request, 'base/autenticar.html',{'ms':'Suba una imagen'})
 
 def procesarImagen(foto1):
     
@@ -203,14 +215,22 @@ def registrarPersona(request):
         print('segundo formulaei')
         form1=UserRegisterForm(request.POST)
         print(form1)
+        pas=form1['password1'].value()
+
+        username=form1['password1'].help_text
+        
+        print('$$$$$$$$$$$$',pas)
         if form1.is_valid():
-            username=form1.cleaned_data['username']
+            # username=form1.cleaned_data['username']
+            
             form1.save()
             messages.success(request, 'Se ha registrado correctamente!')
             print()
             print('segundo formulaei')
             form1=UserRegisterForm()
             print(form1)
+            form1.fields['password1'].help_text = None
+            form1.fields['password2'].help_text = None
             contexto1={
                 'form1':form1
                 }
@@ -220,7 +240,7 @@ def registrarPersona(request):
         else:
             print('segundo formulaei')
             form1=UserRegisterForm()
-            messages.success(request, 'No se ha registrado!')
+            messages.success(request, 'No se ha podido registrar! La clave de contener numeros, letras mayusculas y minusculas, y debe contener mas de 8 carateres ')
             print(form1)
             contexto1={
                 'form1':form1
@@ -232,6 +252,8 @@ def registrarPersona(request):
     else:
         print('segundo formulaei')
         form1=UserRegisterForm()
+        form1.fields['password1'].help_text = None
+        form1.fields['password2'].help_text = None
         
         print(form1)
         contexto1={
@@ -253,4 +275,7 @@ def registrarPersona(request):
        
     return render(request,'base/index.html',contexto1)
     
+
+def hola(request):
+     return render(request,'base/footer-header.html' )
 

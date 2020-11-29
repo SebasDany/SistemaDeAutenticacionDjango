@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 from django.views.static import serve
 from django.conf import settings
 
-from .views import validar,valid,registrarPersona
+from .views import validar,valid,registrarPersona,hola
 
 
 urlpatterns = [
@@ -17,6 +17,7 @@ urlpatterns = [
    path('validar/',validar,name='val'),
    # path('success/',success,name='vall'),
    path('valid/<str:name>/<str:email>/',valid,name='scs'),
+    path('fh/',hola,name='fh'),
 
 
   
